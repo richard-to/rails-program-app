@@ -24,11 +24,11 @@ RSpec.describe ProgramsController, type: :controller do
   # Program. As you add validations to Program, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'title', subtitle: 'subtitle', code: '123456' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { title: '', subtitle: '', code: '1234567' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +103,16 @@ RSpec.describe ProgramsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: 'new title', subtitle: 'new subtitle', code: '654321' }
       }
 
       it "updates the requested program" do
         program = Program.create! valid_attributes
         put :update, {:id => program.to_param, :program => new_attributes}, valid_session
         program.reload
-        skip("Add assertions for updated state")
+        expect(program.title).to eq(new_attributes[:title])
+        expect(program.subtitle).to eq(new_attributes[:subtitle])
+        expect(program.code).to eq(new_attributes[:code])
       end
 
       it "assigns the requested program as @program" do
