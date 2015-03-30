@@ -58,7 +58,7 @@ RSpec.describe "Programs management", type: :request do
       expect(response).to render_template(:new)
       expect(response.body).to include(CGI::escapeHTML("Code is the wrong length (should be 6 characters)"))
       expect(response.body).to include(CGI::escapeHTML("Title can't be blank"))
-      expect(response.body).to include(CGI::escapeHTML("Subtitle can't be blank".html_safe))
+      expect(response.body).to include(CGI::escapeHTML("Subtitle can't be blank"))
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe "Programs management", type: :request do
       expect(response).to render_template(:edit)
       expect(response.body).to include(CGI::escapeHTML("Code is the wrong length (should be 6 characters)"))
       expect(response.body).to include(CGI::escapeHTML("Title can't be blank"))
-      expect(response.body).to include(CGI::escapeHTML("Subtitle can't be blank".html_safe))
+      expect(response.body).to include(CGI::escapeHTML("Subtitle can't be blank"))
     end
   end
 
