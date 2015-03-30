@@ -1,0 +1,39 @@
+---
+- hosts: all
+  sudo: true
+  roles:
+    - role: znzj.rbenv
+      rbenv_ruby_version: 2.2.1
+  vars:
+    - gem_path: "{{rbenv_root}}/shims/gem"
+  tasks:
+    - apt_repository: repo=ppa:chris-lea/node.js
+    - apt: update_cache=yes
+    - apt: name=nodejs
+    - apt: name=vim
+
+    - name: Install ruby dependencies
+      apt: name={{item}}
+      with_items:
+        - git-core
+        - curl
+        - zlib1g-dev
+        - build-essential
+        - libssl-dev
+        - libreadline-dev
+        - libyaml-dev
+        - libsqlite3-dev
+        - sqlite3
+        - libxml2-dev
+        - libxslt1-dev
+        - libcurl4-openssl-dev
+        - python-software-properties
+        - libffi-dev
+
+    - name: Install rails
+      gem:
+        name: rails
+        version: 4.2.0
+        state: present
+        user_install: no
+        executable: "{{gem_path}}"
