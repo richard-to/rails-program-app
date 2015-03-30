@@ -15,31 +15,25 @@
     </div>
   <% end %>
 
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :title, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :title, :class => 'form-control' %>
-    </div>
+    <%= f.text_field :title, :class => 'form-control' %>
     <%= error_span(@program[:title]) %>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :subtitle, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :subtitle, :class => 'form-control' %>
-    </div>
+    <%= f.text_field :subtitle, :class => 'form-control' %>
     <%= error_span(@program[:subtitle]) %>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :code, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :code, :class => 'form-control' %>
-    </div>
+    <%= f.text_field :code, :class => 'form-control' %>
     <%= error_span(@program[:code]) %>
   </div>
 
-
+  <div class="form-group">
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             programs_path, :class => 'btn btn-default' %>
-
+  </div>
 <% end %>
