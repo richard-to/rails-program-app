@@ -1,5 +1,13 @@
 require 'rails_helper'
 
+
+def expect_program_data_error_text(body)
+  expect(body).to include(CGI::escapeHTML("Code is the wrong length (should be 6 characters)"))
+  expect(body).to include(CGI::escapeHTML("Title can't be blank"))
+  expect(body).to include(CGI::escapeHTML("Subtitle can't be blank"))
+end
+
+
 RSpec.describe "Programs management", type: :request do
 
   let(:valid_attributes) {
@@ -56,9 +64,7 @@ RSpec.describe "Programs management", type: :request do
       expect(response).to have_http_status(200)
       post programs_path, :program => invalid_attributes
       expect(response).to render_template(:new)
-      expect(response.body).to include(CGI::escapeHTML("Code is the wrong length (should be 6 characters)"))
-      expect(response.body).to include(CGI::escapeHTML("Title can't be blank"))
-      expect(response.body).to include(CGI::escapeHTML("Subtitle can't be blank"))
+      expect_program_data_error_text(response.body)
     end
   end
 
@@ -83,9 +89,7 @@ RSpec.describe "Programs management", type: :request do
       expect(response).to have_http_status(200)
       patch program_path(@program), :program => invalid_attributes
       expect(response).to render_template(:edit)
-      expect(response.body).to include(CGI::escapeHTML("Code is the wrong length (should be 6 characters)"))
-      expect(response.body).to include(CGI::escapeHTML("Title can't be blank"))
-      expect(response.body).to include(CGI::escapeHTML("Subtitle can't be blank"))
+      expect_program_data_error_text(response.body)
     end
   end
 
