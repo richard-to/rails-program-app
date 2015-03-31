@@ -5,6 +5,10 @@ RSpec.describe Language, type: :model do
     { name: 'language 1' }
   }
 
+  let(:invalid_attributes) {
+    { name: '' }
+  }
+
   it "can create a language instance" do
     language = Language.new
   end
@@ -17,6 +21,11 @@ RSpec.describe Language, type: :model do
   it "cannot create a language that already exists" do
     Language.create!(valid_attributes)
     language = Language.new(valid_attributes)
+    expect(language.valid?).to be_falsey
+  end
+
+  it "cannot create a language with not name" do
+    language = Language.new(invalid_attributes)
     expect(language.valid?).to be_falsey
   end
 end
