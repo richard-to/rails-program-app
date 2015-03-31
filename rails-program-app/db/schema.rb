@@ -11,14 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330203152) do
+ActiveRecord::Schema.define(version: 20150331000402) do
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "programs", force: :cascade do |t|
     t.string   "title"
     t.string   "subtitle"
     t.string   "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "language_id"
   end
+
+  add_index "programs", ["language_id"], name: "index_programs_on_language_id"
 
 end
