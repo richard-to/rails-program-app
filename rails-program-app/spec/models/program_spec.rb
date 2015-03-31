@@ -19,6 +19,11 @@ RSpec.describe Program, type: :model do
     expect(program.valid?).to be_truthy
   end
 
+    it "creates an empty language by default" do
+      program = Program.new(valid_attributes)
+      expect(program.language.name).to eq ''
+    end
+
   context "cannot create a valid program" do
     it "requires a 6-character code" do
       program = Program.new(valid_attributes)

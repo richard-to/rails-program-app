@@ -13,6 +13,11 @@ RSpec.describe Language, type: :model do
     language = Language.new
   end
 
+  it "defaults to an empty string" do
+    language = Language.new
+    expect(language.name).to eq ''
+  end
+
   it "can create a valid language" do
     language = Language.new(valid_attributes)
     expect(language.valid?).to be_truthy
