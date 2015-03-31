@@ -11,18 +11,28 @@ end
 RSpec.describe "Programs management", type: :request do
 
   let(:valid_attributes) {
-    { title: 'title', subtitle: 'subtitle', code: '123456' }
+    { title: 'title', subtitle: 'subtitle', code: '123456', 'language_id': 1 }
   }
 
   let(:invalid_attributes) {
-    { title: '', subtitle: '', code: '123' }
+    { title: '', subtitle: '', code: '123', 'language_id': 3 }
   }
 
   let(:valid_updated_attributes) {
-    { code: '654321' }
+    { code: '654321', language_id: 2 }
   }
 
   before(:each) do
+    Language.create!({
+      :id => 1,
+      :name => "Language 1"
+    })
+
+    Language.create!({
+      :id => 2,
+      :name => "Language 2"
+    })
+
     Program.create!(
       :id => 1,
       :title => "Title 1",

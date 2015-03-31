@@ -10,9 +10,9 @@
   <dd><%= @program.subtitle %></dd>
   <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
   <dd><%= @program.code %></dd>
-  <% if @program.language.name %>
-  <dt><strong><%= model_class.human_attribute_name(:language) %>:</strong></dt>
-  <dd><%= @program.language.name %></dd>
+  <% if @program.language %>
+    <dt><strong><%= model_class.human_attribute_name(:language) %>:</strong></dt>
+    <dd><%= @program.language.name %></dd>
   <% end %>
 </dl>
 

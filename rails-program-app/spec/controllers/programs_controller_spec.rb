@@ -27,14 +27,23 @@ RSpec.describe ProgramsController, type: :controller do
     { title: 'title', subtitle: 'subtitle', code: '123456' }
   }
 
+  let(:valid_attributes_with_language) {
+    { title: 'title', subtitle: 'subtitle', code: '123456', language_id: 1 }
+  }
+
   let(:invalid_attributes) {
-    { title: '', subtitle: '', code: '1234567' }
+    { title: '', subtitle: '', code: '1234567', language_id: 3 }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ProgramsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+  before(:each) do
+    Language.create!({ id: 1, name: 'Language' })
+    Language.create!({ id: 2, name: 'Language 2' })
+  end
 
   describe "GET #index" do
     it "assigns all programs as @programs" do
@@ -75,6 +84,12 @@ RSpec.describe ProgramsController, type: :controller do
         }.to change(Program, :count).by(1)
       end
 
+      it "creates a new Program with a language" do
+        expect {
+          post :create, {:program => valid_attributes_with_language}, valid_session
+        }.to change(Program, :count).by(1)
+      end
+
       it "assigns a newly created program as @program" do
         post :create, {:program => valid_attributes}, valid_session
         expect(assigns(:program)).to be_a(Program)
@@ -103,7 +118,7 @@ RSpec.describe ProgramsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { title: 'new title', subtitle: 'new subtitle', code: '654321' }
+        { title: 'new title', subtitle: 'new subtitle', code: '654321', language_id: 2 }
       }
 
       it "updates the requested program" do
@@ -113,6 +128,7 @@ RSpec.describe ProgramsController, type: :controller do
         expect(program.title).to eq(new_attributes[:title])
         expect(program.subtitle).to eq(new_attributes[:subtitle])
         expect(program.code).to eq(new_attributes[:code])
+        expect(program.language.name).to eq('Language 2')
       end
 
       it "assigns the requested program as @program" do

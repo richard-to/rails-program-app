@@ -20,17 +20,17 @@ RSpec.describe Language, type: :model do
 
   it "can create a valid language" do
     language = Language.new(valid_attributes)
-    expect(language.valid?).to be_truthy
+    expect(language.save).to be_truthy
   end
 
   it "cannot create a language that already exists" do
     Language.create!(valid_attributes)
     language = Language.new(valid_attributes)
-    expect(language.valid?).to be_falsey
+    expect(language.save).to be_falsey
   end
 
   it "cannot create a language with no name" do
     language = Language.new(invalid_attributes)
-    expect(language.valid?).to be_falsey
+    expect(language.save).to be_falsey
   end
 end
