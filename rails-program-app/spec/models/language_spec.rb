@@ -29,7 +29,7 @@ RSpec.describe Language, type: :model do
     expect(language.valid?).to be_falsey
   end
 
-  it "cannot create a language with not name" do
+  it "cannot create a language with no name" do
     language = Language.new(invalid_attributes)
     expect(language.valid?).to be_falsey
   end
