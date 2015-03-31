@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:subtitle) %></th>
       <th><%= model_class.human_attribute_name(:code) %></th>
+      <th><%= model_class.human_attribute_name(:language) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,6 +19,7 @@
         <td><%= link_to program.title, program_path(program) %></td>
         <td><%= program.subtitle %></td>
         <td><%= program.code %></td>
+        <td><%= program.language.name %></td>
         <td><%= local_time_ago(program.created_at) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
